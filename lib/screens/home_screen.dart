@@ -77,8 +77,20 @@ class _HomePageState extends State<HomePage> {
                       ]),
                       child: Column(
                         children: [
-                          Image.network(
-                            data[index].imageUrl,
+                          FadeInImage(
+                            placeholder: const AssetImage(
+                                "assets/images/clothes_placeholder.png"),
+                            image: NetworkImage(
+                              data[index].imageUrl,
+                            ),
+                            imageErrorBuilder: (context, obj, trace) {
+                              return Image(
+                                image: const AssetImage(
+                                    'assets/images/clothes_placeholder.png'),
+                                height: deviceWidth * 0.3,
+                                width: deviceWidth * 0.3,
+                              );
+                            },
                             height: deviceWidth * 0.3,
                             width: deviceWidth * 0.3,
                             fit: BoxFit.cover,

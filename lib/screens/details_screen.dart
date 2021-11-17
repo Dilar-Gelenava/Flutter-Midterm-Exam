@@ -84,9 +84,8 @@ class _DetailsPageState extends State<DetailsPage> {
     return Container(
         decoration: const BoxDecoration(
             gradient: LinearGradient(colors: <Color>[
-          Color(0xff12c2e9),
-          Color(0xffc471ed),
-          Color(0x0ff64f59)
+          Color(0xff3f2b96),
+          Color(0xffa8c0ff),
         ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
         child: Column(
           children: [
@@ -94,8 +93,18 @@ class _DetailsPageState extends State<DetailsPage> {
               margin: const EdgeInsets.symmetric(vertical: 20),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(25.0),
-                child: Image.network(
-                  product.imageUrl,
+                child: FadeInImage(
+                  placeholder:
+                      const AssetImage("assets/images/clothes_placeholder.png"),
+                  image: NetworkImage(product.imageUrl),
+                  imageErrorBuilder: (context, obj, trace) {
+                    return Image(
+                      image: const AssetImage(
+                          'assets/images/clothes_placeholder.png'),
+                      height: deviceWidth * 0.9,
+                      width: deviceWidth * 0.9,
+                    );
+                  },
                   height: deviceWidth * 0.9,
                   width: deviceWidth * 0.9,
                   fit: BoxFit.cover,

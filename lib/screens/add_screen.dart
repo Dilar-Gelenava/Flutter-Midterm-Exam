@@ -144,15 +144,32 @@ class _AddPageState extends State<AddPage> {
                           text: 'BACK'),
                       MainButton(
                           action: () => {
-                                Navigator.of(context).pushNamed('/'),
-                                data.add(Clothes(
-                                  id: Random().nextInt(1000000),
-                                  name: _nameController.text,
-                                  imageUrl: _imageController.text,
-                                  size: _sizeController.text,
-                                  price: double.tryParse(_priceController.text),
-                                  description: _descriptionController.text,
-                                )),
+                                if (_nameController.text == "" ||
+                                    _imageController.text == "" ||
+                                    _sizeController.text == "" ||
+                                    _priceController.text == "" ||
+                                    _descriptionController.text == "")
+                                  {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content:
+                                            Text('Please enter valid data!'),
+                                      ),
+                                    )
+                                  }
+                                else
+                                  {
+                                    Navigator.of(context).pushNamed('/'),
+                                    data.add(Clothes(
+                                      id: Random().nextInt(1000000),
+                                      name: _nameController.text,
+                                      imageUrl: _imageController.text,
+                                      size: _sizeController.text,
+                                      price: double.tryParse(
+                                          _priceController.text),
+                                      description: _descriptionController.text,
+                                    )),
+                                  }
                               },
                           text: 'ADD'),
                     ],

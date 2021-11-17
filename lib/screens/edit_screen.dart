@@ -151,15 +151,32 @@ class _EditPageState extends State<EditPage> {
                           text: 'BACK'),
                       MainButton(
                           action: () => {
-                                data[data.indexOf(product)] = Clothes(
-                                  id: product.id,
-                                  name: _nameController.text,
-                                  imageUrl: _imageController.text,
-                                  size: _sizeController.text,
-                                  price: double.parse(_priceController.text),
-                                  description: _descriptionController.text,
-                                ),
-                                Navigator.of(context).pop(),
+                                if (_nameController.text == "" ||
+                                    _imageController.text == "" ||
+                                    _sizeController.text == "" ||
+                                    _priceController.text == "" ||
+                                    _descriptionController.text == "")
+                                  {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content:
+                                            Text('Please enter valid data!'),
+                                      ),
+                                    )
+                                  }
+                                else
+                                  {
+                                    Navigator.of(context).pop(),
+                                    data[data.indexOf(product)] = Clothes(
+                                      id: product.id,
+                                      name: _nameController.text,
+                                      imageUrl: _imageController.text,
+                                      size: _sizeController.text,
+                                      price:
+                                          double.parse(_priceController.text),
+                                      description: _descriptionController.text,
+                                    ),
+                                  },
                               },
                           text: 'UPDATE'),
                     ],
